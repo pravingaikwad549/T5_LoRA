@@ -30,16 +30,16 @@ def predict():
     for i, question in enumerate(questions):
         input_ids = tokenizer(f" question: {question} context: {context}", return_tensors='pt').input_ids
         if i == 3:
-            model_senti = PeftModel.from_pretrained(model, "/home/pravin/Desktop/April/7thapril/Sentiment/second_iteration/epoch2", map_location=torch.device('cpu'))
+            model_senti = PeftModel.from_pretrained(model, "static/Sentiment_adaptors", map_location=torch.device('cpu'))
             output = tokenizer.decode(model_senti.generate(inputs = input_ids)[0], max_length =4, skip_special_tokens=True)
             res[question] = output
         elif i == 4:
-            model_summ = PeftModel.from_pretrained(model, "/home/pravin/Desktop/April/8thapril/summarization/epoch1", map_location=torch.device('cpu'))
+            model_summ = PeftModel.from_pretrained(model, "static/Summarization_adaptors", map_location=torch.device('cpu'))
             output = tokenizer.decode(model_summ.generate(inputs = input_ids)[0], num_beam= 1, skip_special_tokens=True) 
             res[question] = output
         else:
-            model = T5ForConditionalGeneration.from_pretrained(model_id)
-            output = tokenizer.decode(model.generate(inputs = input_ids)[0], max_new_tokens =4, num_beam= 1, skip_special_tokens=True) 
+            model_QA = PeftModel.from_pretrained(model, "static/QA_adaptors", map_location=torch.device('cpu'))
+            output = tokenizer.decode(model_QA.generate(inputs = input_ids)[0], max_new_tokens =4, num_beam= 1, skip_special_tokens=True) 
             res[question] = output
     res = [{'Question': key, 'Answer': value} for key, value in res.items()]
     res = pd.DataFrame(res)
