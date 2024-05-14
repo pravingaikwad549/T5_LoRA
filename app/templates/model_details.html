@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2 {
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" title="Home">Home</a>
+    <h1>Model Details</h1>
+    <h2>Model Name: T5 Large</h2>
+    <p>
+        The T5 model is a variant of the Transformer model. It is a deep learning model that is used for various natural language processing tasks. The T5 model is trained on a large dataset and is capable of generating human-like text.
+    </p>
+    <p>
+        Here, I have used the T5 Large model which is a 770 million parameter model. I tried to fine-tune the model using LoRA configuration. I have trained 3 adaptor layers on top of the T5 model:
+    </p>
+    <ul>
+        <li>Adaptor 1: QKV Adaptor for Sentiment Analysis trained on Amazon reviews dataset with 3 classes and 50,000 samples.</li>
+        <li>Adaptor 2: QKV Adaptor for Summarization trained on AG News dataset with 50,000 samples.</li>
+        <li>Adaptor 3: QKV Adaptor for Question Answering trained on SQUAD dataset with 50,000 samples.</li>
+    </ul>
+</body>
+</html>
